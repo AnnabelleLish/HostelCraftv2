@@ -1,0 +1,21 @@
+name: HostelCraft
+version: 0.5
+main: me.HostelGamer.HostelCraft.HostelCraft
+Soft-Depend: Essentials
+commands:
+   rankup:
+    description: Will try to move the player to the next rank!
+   myst:
+    description: Mystcrate!
+   mystcrate:
+    description: Mystcrate!
+   hcoin:
+    description: Hostelcraft Coins!
+   coin:
+    description: Hostelcraft Coins!
+   donations:
+    description: /donations (Shows total server donations)!
+   donate:
+    description: /donate (Shows total server donations)!
+   vote:
+    description: /vote (Shows voting links)!
