@@ -118,7 +118,7 @@ public class Mystcrate {
 				plugin.getConfig().set(player.getName() + ".Mystcrates", mystCratesInt);
 				plugin.saveConfig();
 		Random randomGenerator = new Random();
-	    int randomInt = randomGenerator.nextInt(100);
+	    int randomInt = randomGenerator.nextInt(87);
 		if(randomInt == 8){
 			Gears((Player) sender, "Protection 10", 10);
 			return true;
