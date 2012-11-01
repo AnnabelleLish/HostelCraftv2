@@ -1,5 +1,4 @@
 package me.HostelGamer.HostelCraft;
-package me.HostelGamer.HostelCraft;
 
 import java.util.Random;
 
@@ -44,7 +43,7 @@ public class Mystcrate {
 				
 				//Simple Helps Stuff
 				sender.sendMessage(plugin.ColorChat("&3---------------&4[&bMyst Crates&4]&3---------------"));
-				sender.sendMessage(plugin.ColorChat("&3Usage:&4 /Myst open &b(Test your luck and open a crate!"));
+				sender.sendMessage(plugin.ColorChat("&3Usage:&4 /Myst open &b(If you have a Myst Crate it will open it!"));
 				sender.sendMessage(plugin.ColorChat("&3Usage:&4 /Myst or /myst bal &b(Will show how many myst crates you have!"));
 				return true;
 				
@@ -61,6 +60,7 @@ public class Mystcrate {
 				OpenMyst(sender);
 				return true;
 			}
+			return false;
 		}
 		return true;
 		
@@ -96,11 +96,9 @@ public class Mystcrate {
 			}
 			sender.sendMessage("" + args2 + " Mystcrates credited to " + args1 + "'s, Accounts!");
 			return true;
-		}else
-		{
-		return false;
-		targetPlayer.sendMessage(plugin.ColorChat(&4 You don't have access to this command"))
 		}
+		return false;
+		
 		
 	}
 	
@@ -111,7 +109,7 @@ public class Mystcrate {
 		int mystCratesInt = (int) plugin.getConfig().getInt(player.getName() + ".Mystcrates");
 		if(!(mystCratesInt < 1)){
 			if(pi.firstEmpty() > 31 || pi.firstEmpty() == -1){
-				player.sendMessage(plugin.ColorChat("&cYou're running out of inventory space!"));
+				player.sendMessage(plugin.ColorChat("&cYou're Inventory is full or is all most full!"));
 			}else{
 				mystCratesInt--;
 				plugin.getConfig().set(player.getName() + ".Mystcrates", mystCratesInt);
@@ -142,7 +140,6 @@ public class Mystcrate {
 			Gears((Player) sender, "Protection 5", 5);
 			return true;
 		}
-
 		if(randomInt > 22 && randomInt < 25){
 			Bow((Player) sender, "Gods Bow");
 			return true;
@@ -191,23 +188,42 @@ public class Mystcrate {
 			pi.addItem(item);
 			return true;
 		}
-		if(randomInt > 75 && randomInt < 86){
+		if(randomInt > 75 && randomInt < 85){
 			player.sendMessage(plugin.ColorChat("&6You got: &316 &6Tnt!"));
 			ItemStack item = new ItemStack(Material.TNT, 16);
 			pi.addItem(item);
 			return true;
 		}
-		if(randomInt > 85 && randomInt < 87 ){
-				if(randomInt > 85 && randomInt < 87){
-			Pick((Player) sender, "Notchs Pick!");
+		if(randomInt > 84 && randomInt < 86){
+			Pick((Player) sender, "Notch's Pickaxe");
 			return true;
 		}
-				if(randomInt > 85 && randomInt < 87){
-			plugin.getServer().broadcastMessage(plugin.ColorChat("&3" + player.getName() + " &dOpened a Mystcrate and won: &6 Notch's Pickaxe!!&d!"));
+		if(randomInt > 85 && randomInt < 88){
+			plugin.getServer().broadcastMessage(plugin.ColorChat("&3" + player.getName() + " &dOpened a Mystcrate and won: &6The Base Pack&d!"));
+			ItemStack item = new ItemStack(Material.OBSIDIAN, 256);
+			ItemStack item1 = new ItemStack(Material.BOOKSHELF, 64);
+			ItemStack item2 = new ItemStack(Material.ENCHANTMENT_TABLE, 2);
+			ItemStack item4 = new ItemStack(Material.SANDSTONE, 256);
+			ItemStack item5 = new ItemStack(Material.SMOOTH_BRICK, 256);
+			ItemStack item6 = new ItemStack(Material.WOOD, 256);
+			pi.addItem(item1, item2, item4, item5, item6);
 			return true;
 		}
-		}else{sender.sendMessage(plugin.ColorChat("&cYou have no Myst Crates!"));
-		sender.sendMessage(plugin.ColorChat("&2Want Myst Crates?! You can buy some at &bwww.hostelcraft.net/donate"));}
+		if(randomInt == 87){
+			plugin.getServer().broadcastMessage(plugin.ColorChat("&3" + player.getName() + " &dOpened a Mystcrate and won: &6 Base Pack II &d!"));
+			ItemStack item = new ItemStack(Material.OBSIDIAN, 512);
+			ItemStack item1 = new ItemStack(Material.BOOKSHELF, 128);
+			ItemStack item2 = new ItemStack(Material.ENCHANTMENT_TABLE, 4);
+			ItemStack item4 = new ItemStack(Material.SANDSTONE, 512);
+			ItemStack item5 = new ItemStack(Material.SMOOTH_BRICK, 512);
+			ItemStack item6 = new ItemStack(Material.WOOD, 512);
+
+			pi.addItem(item1, item2, item4, item5, item6);
+			return true;
+		}
+		}
+		}else{sender.sendMessage(plugin.ColorChat("&cYou don't have any Myst Crates!"));
+		sender.sendMessage(plugin.ColorChat("&2You can buy some at &bwww.hostelcraft.net/donate"));}
 		return false;
 		
 	}
@@ -226,10 +242,11 @@ public class Mystcrate {
 		item1.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, level);
 		item2.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, level);
 		item3.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, level);
-		pi.addItem(item);
-		pi.addItem(item1);
-		pi.addItem(item2);
-		pi.addItem(item3);
+		item3.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, level);
+		item.addUnsafeEnchantment(Enchantment.OXYGEN, level);
+		item.addUnsafeEnchantment(Enchantment.WATER_WORKER, level);
+		pi.addItem(item, item1, item2, item3);
+		return;
 		
 	}
 	private void Bow(Player name, String itemName){
@@ -244,6 +261,7 @@ public class Mystcrate {
 		item.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 3);
 		item.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 1);
 		pi.addItem(item);
+		return;
 		
 	}
 	private void Sword(Player name, String itemName){
@@ -256,21 +274,27 @@ public class Mystcrate {
 		item.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 3);
 		item.addUnsafeEnchantment(Enchantment.LOOT_BONUS_MOBS, 4);
 		pi.addItem(item);
+		return;
 		
 	}
 	private void Money(String name, String itemName, int Money, Player player){
 		try{
 			plugin.getServer().broadcastMessage(plugin.ColorChat("&3" + player.getName() + " &dOpened a Mystcrate and won: &6" + itemName + "&d!"));
 		Economy.add(name, Money);
+		return;
 		}catch (Exception ex) {}
+		return;
 	}
-		private void Pick(Player name, String itemName){
-		Player player = (Player) name;		
+	private void Pick(Player name, String itemName){
+		Player player = (Player) name;
+		plugin.getServer().broadcastMessage(plugin.ColorChat("&3" + player.getName() + " &dOpened a Mystcrate and won: &6Notch's Pickaxe&d!"));
+		
 		PlayerInventory pi = player.getInventory();
-		item.addUnsafeEnchantment(Enchantment.LOOT_BONUS_MINING, 5);
-		item.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+		ItemStack item = new ItemStack(Material.DIAMOND_PICKAXE, 1);
 		item.addUnsafeEnchantment(Enchantment.DIG_SPEED, 5);
+		item.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+		item.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 5);
 		pi.addItem(item);
 		return;
-		}
+	}
 	}
