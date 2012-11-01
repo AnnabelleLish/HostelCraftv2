@@ -1,4 +1,5 @@
 package me.HostelGamer.HostelCraft;
+package me.HostelGamer.HostelCraft;
 
 import java.util.Random;
 
@@ -43,7 +44,7 @@ public class Mystcrate {
 				
 				//Simple Helps Stuff
 				sender.sendMessage(plugin.ColorChat("&3---------------&4[&bMyst Crates&4]&3---------------"));
-				sender.sendMessage(plugin.ColorChat("&3Usage:&4 /Myst open &b(If you have a Myst Crate it will open it!"));
+				sender.sendMessage(plugin.ColorChat("&3Usage:&4 /Myst open &b(Test your luck and open a crate!"));
 				sender.sendMessage(plugin.ColorChat("&3Usage:&4 /Myst or /myst bal &b(Will show how many myst crates you have!"));
 				return true;
 				
@@ -96,9 +97,11 @@ public class Mystcrate {
 			}
 			sender.sendMessage("" + args2 + " Mystcrates credited to " + args1 + "'s, Accounts!");
 			return true;
-		}
+		}else
+		{
 		return false;
-		
+		targetPlayer.sendMessage(plugin.ColorChat(&4 You don't have access to this command"))
+		}
 		
 	}
 	
@@ -109,13 +112,13 @@ public class Mystcrate {
 		int mystCratesInt = (int) plugin.getConfig().getInt(player.getName() + ".Mystcrates");
 		if(!(mystCratesInt < 1)){
 			if(pi.firstEmpty() > 31 || pi.firstEmpty() == -1){
-				player.sendMessage(plugin.ColorChat("&cYou're Inventory is full or is all most full!"));
+				player.sendMessage(plugin.ColorChat("&cYou're running out of inventory space!"));
 			}else{
 				mystCratesInt--;
 				plugin.getConfig().set(player.getName() + ".Mystcrates", mystCratesInt);
 				plugin.saveConfig();
 		Random randomGenerator = new Random();
-	    int randomInt = randomGenerator.nextInt(85);
+	    int randomInt = randomGenerator.nextInt(100);
 		if(randomInt == 8){
 			Gears((Player) sender, "Protection 10", 10);
 			return true;
@@ -140,6 +143,7 @@ public class Mystcrate {
 			Gears((Player) sender, "Protection 5", 5);
 			return true;
 		}
+
 		if(randomInt > 22 && randomInt < 25){
 			Bow((Player) sender, "Gods Bow");
 			return true;
@@ -188,14 +192,23 @@ public class Mystcrate {
 			pi.addItem(item);
 			return true;
 		}
-		if(randomInt > 75 && randomInt < 85){
+		if(randomInt > 75 && randomInt < 86){
 			player.sendMessage(plugin.ColorChat("&6You got: &316 &6Tnt!"));
 			ItemStack item = new ItemStack(Material.TNT, 16);
 			pi.addItem(item);
 			return true;
-		}}
-		}else{sender.sendMessage(plugin.ColorChat("&cYou don't have any Myst Crates!"));
-		sender.sendMessage(plugin.ColorChat("&2You can buy some at &bwww.hostelcraft.net/donate"));}
+		}
+		if(randomInt > 85 && randomInt < 87 ){
+				if(randomInt > 85 && randomInt < 87){
+			Pick((Player) sender, "Notchs Pick!");
+			return true;
+		}
+				if(randomInt > 85 && randomInt < 87){
+			plugin.getServer().broadcastMessage(plugin.ColorChat("&3" + player.getName() + " &dOpened a Mystcrate and won: &6 Notch's Pickaxe!!&d!"));
+			return true;
+		}
+		}else{sender.sendMessage(plugin.ColorChat("&cYou have no Myst Crates!"));
+		sender.sendMessage(plugin.ColorChat("&2Want Myst Crates?! You can buy some at &bwww.hostelcraft.net/donate"));}
 		return false;
 		
 	}
@@ -257,4 +270,13 @@ public class Mystcrate {
 		}catch (Exception ex) {}
 		return;
 	}
+		private void Pick(Player name, String itemName){
+		Player player = (Player) name;		
+		PlayerInventory pi = player.getInventory();
+		item.addUnsafeEnchantment(Enchantment.LOOT_BONUS_MINING, 5);
+		item.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+		item.addUnsafeEnchantment(Enchantment.DIG_SPEED, 5);
+		pi.addItem(item);
+		return;
+		}
 	}
