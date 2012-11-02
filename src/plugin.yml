@@ -19,5 +19,3 @@ commands:
     description: /donate (Shows total server donations)!
    vote:
     description: /vote (Shows voting links)!
-   busy:
-    description: This is an OP Command!

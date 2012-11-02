@@ -61,7 +61,6 @@ public class Mystcrate {
 				OpenMyst(sender);
 				return true;
 			}
-			return false;
 		}
 		return true;
 		
@@ -231,7 +230,6 @@ public class Mystcrate {
 		pi.addItem(item1);
 		pi.addItem(item2);
 		pi.addItem(item3);
-		return;
 		
 	}
 	private void Bow(Player name, String itemName){
@@ -246,7 +244,6 @@ public class Mystcrate {
 		item.addUnsafeEnchantment(Enchantment.ARROW_FIRE, 3);
 		item.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 1);
 		pi.addItem(item);
-		return;
 		
 	}
 	private void Sword(Player name, String itemName){
@@ -259,16 +256,13 @@ public class Mystcrate {
 		item.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, 3);
 		item.addUnsafeEnchantment(Enchantment.LOOT_BONUS_MOBS, 4);
 		pi.addItem(item);
-		return;
 		
 	}
 	private void Money(String name, String itemName, int Money, Player player){
 		try{
 			plugin.getServer().broadcastMessage(plugin.ColorChat("&3" + player.getName() + " &dOpened a Mystcrate and won: &6" + itemName + "&d!"));
 		Economy.add(name, Money);
-		return;
 		}catch (Exception ex) {}
-		return;
 	}
 		private void Pick(Player name, String itemName){
 		Player player = (Player) name;		

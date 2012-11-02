@@ -21,7 +21,6 @@ public class HostelCraft extends JavaPlugin {
 	public final Mystcrate My = new Mystcrate(this);
 	public final Info Info = new Info(this);
 	public final HostelCraftListener hl = new HostelCraftListener(this);
-	public final DailyLootCrate loot = new DailyLootCrate(this);
 
 	
 	public void onEnable() {
@@ -58,15 +57,6 @@ public class HostelCraft extends JavaPlugin {
 		
 		if(commandLabel.equalsIgnoreCase("rankup")){
 			R.loadRankup(sender);
-			return true;
-		}
-		
-		if(commandLabel.equalsIgnoreCase("busy")){
-			if(sender.isOp()){
-				getServer().broadcastMessage(ColorChat("&3" + sender.getName() + ", &2Is busy! Please contact a staff member or"));
-				getServer().broadcastMessage(ColorChat("&6Use The Command:&c /mail send " + sender.getName() + " <Message>"));
-				return true;
-			}
 			return true;
 		}
 		

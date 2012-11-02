@@ -16,9 +16,10 @@ public class Ranking {
 		plugin = instance;
 	}
 	public boolean loadRankup(CommandSender sender){
+		if(sender instanceof Player){
 			Player player = (Player) sender;
 			PermissionManager pex = PermissionsEx.getPermissionManager();
-			PermissionUser user = pex.getUser(player.getName());
+			PermissionUser user = pex.getUser(player);
 			
 			if(user.inGroup("Private")){
 			Rankup(player.getName(), 50, "Private", "PFC" , "&2[PFC]&2");
@@ -87,6 +88,7 @@ public class Ranking {
 			Rankup(player.getName(), 25, "User", "Private" , "&2[Private]&2");
 			return true;
 			}
+		}else{}
 		return false;
 	}
 	
@@ -106,17 +108,13 @@ public class Ranking {
 				user.addGroup(Cnewrank);
 				Economy.subtract(player, amount);
 				Tplayer.giveExp(amount);
-				return;
+				
 			
 		}else{
 			Tplayer.sendMessage(plugin.ColorChat("&cInsufficient funds: You need: $" + amount + ", To buy: " + newrank));
 		}
-		}catch(Exception ex){plugin.logger.info("Error Something went wrong with /rankup");
-		return;}
-		}else{Tplayer.sendMessage(plugin.ColorChat("&dCongratulations, &eYou are the highest rank in the game!"));
-		return;
-		}
-		return;
+		}catch(Exception ex){plugin.logger.info("Error Something went wrong with /rankup");}
+		}else{Tplayer.sendMessage(plugin.ColorChat("&dCongratulations, &eYou are the highest rank in the game!"));}
 	}
 	
 	public void CheckGroups(String player, String newrank){
@@ -125,29 +123,21 @@ public class Ranking {
 		
 		if(user.inGroup("Admin")){
 			user.setPrefix(newrank + " &4[&eAdmin&4]&e ", "");
-			return;
 		}else if(user.inGroup("Mod")){
 			user.setPrefix(newrank + " &4[&3Mod&4]&e ", "");
-			return;
 		}else if(user.inGroup("TMod")){
 			user.setPrefix(newrank + " &4[&6Helper&4]&e ", "");
-			return;
 		}else if(user.inGroup("VIP-Major")){
 			user.setPrefix(newrank + " &b[&5VIP-Major&b]&5 ", "");
-			return;
 		}else if(user.inGroup("VIP-Minor")){
 			user.setPrefix(newrank + " &b[&dVIP-Minor&b]&d ", "");
-			return;
 		}else if(user.inGroup("Donor-Major")){
 			user.setPrefix(newrank + " &b[&6Donor-Major&b]&6 ", "");
-			return;
 		}else if(user.inGroup("Donor-Minor")){
 			user.setPrefix(newrank + " &b[&cDonor-Minor&b]&c ", "");
-			return;
 		}else{
 			user.setPrefix(newrank + " ", "");
 		}
-		return;
 		
 	}
 
